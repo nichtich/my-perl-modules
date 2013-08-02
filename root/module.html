@@ -1,0 +1,22 @@
+[% release   = module.release %]
+[% resources = module.release.resources %]
+<b>$module.name</b>
+[% IF resources.repository.url %]
+  <a href="$resources.repository.url"><img src="img/github.png" height="21" width="20"></a>
+[% END %]
+<div class="abstract">$abstract</div>
+<div class="release">
+  <a href="https://metacpan.org/module/$module.module">$release.version</a>
+  $release.date
+  $release.author
+  (<a href="http://perlresume.org/$release.author">r</a>/<a href="http://www.github-meets-cpan.com/user/$release.author">gmc</a>)
+  [% INCLUDE tests.html tests=module.release.tests %]
+</div>
+<div class="devel">
+  <a href="https://travis-ci.org/nichtich/$module.name"><img src="https://travis-ci.org/nichtich/[% module.name %].png" alt="Build Status" style="max-width:100%;"></a>
+  <a href="https://coveralls.io/r/nichtich/$module.name?branch=master"><img src="https://coveralls.io/repos/nichtich/$module.name/badge.png?branch=master" alt="Coverage Status" style="max-width:100%;"></a>
+  [% IF resources.bugtracker.web %]
+    <a href="$resources.bugtracker.web">issues</a>
+  [% END %]
+</div>
+

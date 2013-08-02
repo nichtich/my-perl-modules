@@ -1,0 +1,9 @@
+<html>
+  <body>
+    <ul>
+      [% FOREACH m IN modules %]
+        <li>[% INCLUDE module.html module=m.value %]</li >
+      [% END %]
+    </ul>
+  </body>
+</html>
