@@ -1,9 +1,15 @@
 <html>
+  <head>
+    <script src="js/jquery-2.0.3.min.js"></script>
+    <script src="js/humane.js"></script>
+  </head>
   <body>
+    by $author (<a href="http://perlresume.org/$author">r</a>/<a href="http://www.github-meets-cpan.com/user/$author">gmc</a>)
     <ul>
       [% FOREACH m IN modules %]
         <li>[% INCLUDE module.html module=m.value %]</li >
       [% END %]
     </ul>
+    <script>jQuery('span').humaneDates();</script>
   </body>
 </html>

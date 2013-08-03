@@ -6,17 +6,19 @@
 [% END %]
 <div class="abstract">$abstract</div>
 <div class="release">
-  <a href="https://metacpan.org/module/$module.module">$release.version</a>
-  $release.date
-  $release.author
-  (<a href="http://perlresume.org/$release.author">r</a>/<a href="http://www.github-meets-cpan.com/user/$release.author">gmc</a>)
+  released <a href="https://metacpan.org/module/$module.module">$release.version</a>
+  <span title="$release.date">$release.date</span>
   [% INCLUDE tests.html tests=module.release.tests %]
+  [% IF resources.bugtracker.web %]
+    $resources.bugtracker.issues
+    <a href="$resources.bugtracker.web">issues</a>
+  [% END %]
 </div>
 <div class="devel">
   <a href="https://travis-ci.org/nichtich/$module.name"><img src="https://travis-ci.org/nichtich/[% module.name %].png" alt="Build Status" style="max-width:100%;"></a>
   <a href="https://coveralls.io/r/nichtich/$module.name?branch=master"><img src="https://coveralls.io/repos/nichtich/$module.name/badge.png?branch=master" alt="Coverage Status" style="max-width:100%;"></a>
-  [% IF resources.bugtracker.web %]
-    <a href="$resources.bugtracker.web">issues</a>
+  [% IF resources.repository.date %]
+    updated <span title="$resources.repository.date">$resources.repository.date</span>
   [% END %]
 </div>
 

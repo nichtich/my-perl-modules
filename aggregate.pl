@@ -53,6 +53,13 @@ foreach my $name (@repositories) {
 
     $module{abstract} //= $release->{abstract};
 
+    if ($module{resources}->{repository}->{url}) {
+        # TODO: resources.bugtracker.date
+    }
+    if ($module{resources}->{bugtracker}->{web}) {
+        # TODO: resources.bugtracker.issues
+    }
+
     $modules{$name} = \%module;
 }
 

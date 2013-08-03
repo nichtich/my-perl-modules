@@ -15,6 +15,7 @@ builder {
         sub {
             my $env = shift;
             $env->{'tt.vars'}->{modules} = $modules->load;
+            $env->{'tt.vars'}->{author}  = 'VOJ';
             $app->($env);
         }
     };
