@@ -4,10 +4,10 @@
     <script src="js/humane.js"></script>
   </head>
   <body>
-    by $author (<a href="http://perlresume.org/$author">r</a>/<a href="http://www.github-meets-cpan.com/user/$author">gmc</a>)
+    by $author (<a href="http://perlresume.org/$author">r</a>/<a href="http://metacpan.org/author/$author">CPAN</a>)
     <ul>
       [% FOREACH m IN modules %]
-        <li>[% INCLUDE module.html module=m.value %]</li >
+        <li>[% INCLUDE module.html module=m %]</li >
       [% END %]
     </ul>
     <script>jQuery('span').humaneDates();</script>

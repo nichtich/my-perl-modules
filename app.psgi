@@ -1,25 +1,25 @@
 use Plack::Builder;
-use Config::Reload;
+use Catmandu qw(importer);
 
 my $devel   = ($ENV{PLACK_ENV} || '') eq 'development';
-my $modules = Config::Reload->new( file => 'modules.json' );
+my $modules = importer('JSON', multiline => 1, file => 'modules.json' )->to_array;
 
 builder {
     enable_if { $devel } 'Debug';
     enable_if { $devel } 'Debug::TemplateToolkit';
     enable Static =>
         path => qr{\.(png|ico|js|css)$},
-        root => 'root';
+        root => 'htdocs';
     enable sub {
         my $app = shift;
         sub {
             my $env = shift;
-            $env->{'tt.vars'}->{modules} = $modules->load;
+            $env->{'tt.vars'}->{modules} = $modules;
             $env->{'tt.vars'}->{author}  = 'VOJ';
             $app->($env);
         }
     };
     enable TemplateToolkit =>
-        INCLUDE_PATH => 'root',
+        INCLUDE_PATH => 'htdocs',
         INTERPOLATE  => 1;
 };
