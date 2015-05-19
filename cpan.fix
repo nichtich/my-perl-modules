@@ -12,10 +12,11 @@ append(debian.package,'-perl');
 get_json("https://sources.debian.net/api/src/{package}/", vars: debian, path: debian)
 if exists(debian.error)
   remove_field(debian)
+else
+  # irrelevant fields
+  remove_field(debian.type)
+  remove_field(debian.path)
+  remove_field(debian.suite)
+
+  # TODO: get Ubuntu releases via lauchpad API
 end
-
-# irrelevant fields
-remove_field(debian.type)
-remove_field(debian.path)
-remove_field(debian.suite)
-

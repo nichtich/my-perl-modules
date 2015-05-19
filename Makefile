@@ -1,9 +1,8 @@
 AUTHOR=VOJ
 
-index.html: 
-	#modules.json
+index.html: modules.json
 	echo '{"author":"${AUTHOR}","modules":' > tmp.json
-	cat modules.json >> tmp.json
+	cat $< >> tmp.json
 	echo '}' >> tmp.json
 	cd htdocs && catmandu -Ilocal/lib/perl5 convert JSON --multiline 1 \
 		to Template --template index.tt --interpolate 1 \
