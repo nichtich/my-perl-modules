@@ -1,20 +1,12 @@
 [% release   = module.release %]
 [% resources = module.resources %]
+[% debian    = module.debian %]
 
 <b>$module.name</b>
 [% IF resources.repository.url %]
   <a href="$resources.repository.url"><img src="img/github.png" height="21" width="20"></a>
 [% END %]
-<div class="abstract">$abstract</div>
-<div class="release">
-  released <a href="https://metacpan.org/module/$module.module">$module.version</a>
-  <span title="$module.date">$module.date</span>
-  [% INCLUDE tests.html tests=module.tests %]
-  [% IF resources.bugtracker.web %]
-    $resources.bugtracker.issues
-    <a href="$resources.bugtracker.web">issues</a>
-  [% END %]
-</div>
+
 <div class="devel">
   <a href="https://travis-ci.org/nichtich/$module.name"><img src="https://travis-ci.org/nichtich/[% module.name %].png" alt="Build Status" style="max-width:100%;"></a>
   <a href="https://coveralls.io/r/nichtich/$module.name?branch=master"><img src="https://coveralls.io/repos/nichtich/$module.name/badge.png?branch=master" alt="Coverage Status" style="max-width:100%;"></a>
@@ -23,3 +15,31 @@
   [% END %]
 </div>
 
+<div class="abstract">$abstract</div>
+<div class="release">
+  released 
+  <b><a href="https://metacpan.org/module/$module.module">$module.version</a></b>
+  <span title="$module.date">$module.date</span>
+  [% INCLUDE tests.html tests=module.tests %]
+  [% IF resources.bugtracker.web %]
+    $resources.bugtracker.issues
+    <a href="$resources.bugtracker.web">issues</a>
+  [% END %]
+</div>
+[% IF debian %]
+<div>
+    Debian package
+    <a href="https://packages.debian.org/search?keywords=$debian.package&searchon=names&suite=stable&section=all">$debian.package</a>
+    <ul>
+    [% FOREACH v IN debian.versions %]
+      [% FOREACH suite IN v.suites %]
+      <li>
+        <a href="https://packages.debian.org/$suite/$debian.package">$suite</a>
+        $v.version: $v.area
+      </li>
+      [% END %]
+    [% END %]
+    </ul>
+</div>
+[% END %]
+<hr>

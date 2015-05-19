@@ -1,0 +1,21 @@
+move_field(distribution,name)
+copy_field(name,module)
+replace_all(module,"-","::")
+
+# guess Debian package name
+copy_field(name, debian.package)
+downcase(debian.package)
+prepend(debian.package, 'lib');
+append(debian.package,'-perl');
+
+# get information about Debian package name
+get_json("https://sources.debian.net/api/src/{package}/", vars: debian, path: debian)
+if exists(debian.error)
+  remove_field(debian)
+end
+
+# irrelevant fields
+remove_field(debian.type)
+remove_field(debian.path)
+remove_field(debian.suite)
+
