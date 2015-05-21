@@ -5,7 +5,7 @@ index.html: modules.json
 	cat $< >> tmp.json
 	echo '}' >> tmp.json
 	cd htdocs && catmandu -Ilocal/lib/perl5 convert JSON --multiline 1 \
-		to Template --template index.tt --interpolate 1 \
+		to Template --template index.html --interpolate 1 \
 			< ../tmp.json > ../index.html
 
 modules.json:

@@ -15,11 +15,22 @@
           <a href="http://perlresume.org/$author">resume</a>
         </small>
     </h1>
-    <ul>
-      [% FOREACH m IN modules %]
-        <li>[% INCLUDE module.html module=m %]</li >
-      [% END %]
-    </ul>
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+         <th>name</th>
+         <th>v</th>
+         <th>release</th>
+         <th>debian</th>
+         <th>status</th>
+        </tr>
+      </thead>
+      <tbody>
+       [% FOREACH m IN modules %]
+        <tr>[% INCLUDE module.html module=m %]</tr>
+       [% END %]
+      </tbody>
+    </table>
     <script>jQuery('span').humaneDates();</script>
   </body>
 </html>

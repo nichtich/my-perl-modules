@@ -9,7 +9,10 @@ prepend(debian.package, 'lib');
 append(debian.package,'-perl');
 
 # get information about Debian package name
-get_json("https://sources.debian.net/api/src/{package}/", vars: debian, path: debian)
+get_json(
+    "https://sources.debian.net/api/src/{package}/",
+    vars: debian, path: debian
+)
 if exists(debian.error)
   remove_field(debian)
 else

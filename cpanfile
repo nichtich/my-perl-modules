@@ -5,7 +5,7 @@ requires 'Catmandu::Importer::getJSON', '0.50';
 
 requires 'Template'; # libtemplate-perl
 
-requires 'Catmandu::Exporter::Template';
+requires 'Catmandu::Exporter::Template', '0.06';
 
 feature 'psgi' => sub {
     requires 'Plack'; # libplack-perl

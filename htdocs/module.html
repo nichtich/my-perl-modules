@@ -2,34 +2,31 @@
 [% resources = module.resources %]
 [% debian    = module.debian %]
 
-<b>$module.name</b>
-[% IF resources.repository.url %]
-  <a href="$resources.repository.url"><img src="img/github.png" height="21" width="20"></a>
-[% END %]
+<td>
+    <div>$module.name</div>
+    <div class="abstract">$abstract</div>
+    <div>
+      <a href="https://metacpan.org/release/$module.name">CPAN</a>
+      [% IF resources.repository.url %]
+        <a href="$resources.repository.url"><img src="img/github.png" height="21" width="20"></a>
+      [% END %]
+    </div>
+</td>
 
-<div class="devel">
-  <a href="https://travis-ci.org/nichtich/$module.name"><img src="https://travis-ci.org/nichtich/[% module.name %].png" alt="Build Status" style="max-width:100%;"></a>
-  <a href="https://coveralls.io/r/nichtich/$module.name?branch=master"><img src="https://coveralls.io/repos/nichtich/$module.name/badge.png?branch=master" alt="Coverage Status" style="max-width:100%;"></a>
+<td>
+  <a href="https://metacpan.org/module/$module.module">$module.version</a>
+</td>
+
+<td>
+  <span title="$module.date">$module.date</span>
   [% IF resources.repository.date %]
     updated <span title="$resources.repository.date">$resources.repository.date</span>
   [% END %]
-</div>
+</td>
 
-<div class="abstract">$abstract</div>
-<div class="release">
-  released 
-  <b><a href="https://metacpan.org/module/$module.module">$module.version</a></b>
-  <span title="$module.date">$module.date</span>
-  [% INCLUDE tests.html tests=module.tests %]
-  [% IF resources.bugtracker.web %]
-    $resources.bugtracker.issues
-    <a href="$resources.bugtracker.web">issues</a>
-  [% END %]
-</div>
+<td>
 [% IF debian %]
-<div>
-    Debian package
-    <a href="https://packages.debian.org/search?keywords=$debian.package&searchon=names&suite=stable&section=all">$debian.package</a>
+    <a href="https://tracker.debian.org/pkg/$debian.package">$debian.package</a>
     <ul>
     [% FOREACH v IN debian.versions %]
       [% FOREACH suite IN v.suites %]
@@ -40,6 +37,19 @@
       [% END %]
     [% END %]
     </ul>
-</div>
 [% END %]
-<hr>
+</td>
+
+<td>
+  <div>
+    <a href="https://travis-ci.org/nichtich/$module.name"><img src="https://travis-ci.org/nichtich/[% module.name %].png" alt="Build Status" style="max-width:100%;"></a>
+    <a href="https://coveralls.io/r/nichtich/$module.name?branch=master"><img src="https://coveralls.io/repos/nichtich/$module.name/badge.png?branch=master" alt="Coverage Status" style="max-width:100%;"></a>
+  </div>
+
+  [% INCLUDE tests.html tests=module.tests %]
+  [% IF resources.bugtracker.web %]
+    $resources.bugtracker.issues
+    <a href="$resources.bugtracker.web">issues</a>
+  [% END %]
+</td>
+
